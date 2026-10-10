@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #F7F4ED;
+    --bg-paper: #FFFCF5;
+    --text-primary: #302C27;
+    --text-secondary: #71685E;
+    --accent-red: #A94D3C;
+    --accent-sage: #71806A;
+    --border-main: #DED7CB;
+    --paper-shadow: 0 10px 30px -5px rgba(48, 44, 39, 0.08), 0 4px 6px -2px rgba(48, 44, 39, 0.04);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  button, a, input, select {
+    touch-action: manipulation;
+  }
+
+  button:focus-visible, a:focus-visible, input:focus-visible {
+    outline: 2px solid var(--accent-red);
+    outline-offset: 2px;
+  }
+
+  h1, h2, h3, h4, .font-serif-title {
+    font-family: 'Noto Serif', serif;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   3D SKETCHBOOK BENDING ENGINE
+   Based on Meng To's Sketchbook (https://threeui.com/css/sketchbook, MIT License)
+   Adapted for Nếp Việt interactive traditional costume sketchbook
+   ------------------------------------------------------------------------- */
+.sb-book-container {
+  perspective: 2200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.sb-curl {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--pw, 400px);
+  height: 100%;
+  transform-style: preserve-3d;
+  z-index: 35;
+  pointer-events: none;
+}
+
+.sb-curl.next {
+  left: 50%;
+  transform-origin: left center;
+  transform: rotateY(calc(-1 * var(--tt, 0deg)));
+}
+
+.sb-curl.prev {
+  right: 50%;
+  left: auto;
+  transform-origin: right center;
+  transform: rotateY(var(--tt, 0deg));
+}
+
+.sb-strip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: var(--sw, 22.22px);
+  transform-style: preserve-3d;
+}
+
+.sb-curl.next .sb-strip {
+  transform-origin: left center;
+}
+
+.sb-curl.prev .sb-strip {
+  transform-origin: right center;
+}
+
+.sb-curl.next > .sb-strip {
+  left: 0;
+}
+
+.sb-curl.prev > .sb-strip {
+  right: 0;
+  left: auto;
+}
+
+.sb-curl.next .sb-strip .sb-strip {
+  left: 100%;
+  transform: rotateY(var(--td, 0deg));
+}
+
+.sb-curl.prev .sb-strip .sb-strip {
+  right: 100%;
+  left: auto;
+  transform: rotateY(calc(-1 * var(--td, 0deg)));
+}
+
+.sb-face {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -0.8px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-color: var(--bg-paper, #FFFCF5);
+}
+
+.sb-face.back {
+  transform: rotateY(180deg);
+}
+
+.sb-face-inner {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: var(--pw, 400px);
+  pointer-events: none;
+}
+
+.sb-face .sb-sh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sb-curl.next .sb-face.front .sb-sh,
+.sb-curl.prev .sb-face.back .sb-sh {
+  background: linear-gradient(90deg, rgba(48, 44, 39, var(--a1, 0)), rgba(48, 44, 39, var(--a2, 0)));
+}
+
+.sb-curl.next .sb-face.back .sb-sh,
+.sb-curl.prev .sb-face.front .sb-sh {
+  background: linear-gradient(90deg, rgba(48, 44, 39, var(--a2, 0)), rgba(48, 44, 39, var(--a1, 0)));
+}
+
+.sb-face .sb-gl {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: #ffffff;
+  opacity: calc(var(--shade, 0) * var(--lit, 1) * var(--lit, 1) * 0.12);
+}
+
+.sb-gutter-shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 35%;
+  pointer-events: none;
+  opacity: calc(var(--shade, 0) * 0.45);
+  z-index: 25;
+}
+
+.sb-gutter-shade.left {
+  right: 0;
+  background: linear-gradient(270deg, rgba(48, 44, 39, 0.22), rgba(48, 44, 39, 0) 80%);
+}
+
+.sb-gutter-shade.right {
+  left: 0;
+  background: linear-gradient(90deg, rgba(48, 44, 39, 0.18), rgba(48, 44, 39, 0) 80%);
+}
+

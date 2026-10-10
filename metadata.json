@@ -1,0 +1,8 @@
+{
+  "name": "Remix Nếp Việt - Mở trang xưa, phối chất riêng",
+  "description": "Sketchbook tương tác tìm hiểu và xưởng phối trang phục truyền thống Việt Nam trên nhân vật minh họa 2D.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
